@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="@string/nav_home" />
+
+        <item
+            android:id="@+id/nav_profil"
+            android:icon="@drawable/ic_person_black_24dp"
+            android:title="@string/nav_profil" />
+
+        <item
+            android:id="@+id/nav_list_rute"
+            android:icon="@drawable/ic_place_black_24dp"
+            android:title="@string/nav_list_rute" />
+
+        <item
+            android:id="@+id/nav_maps"
+            android:icon="@drawable/ic_map_black_24dp"
+            android:title="@string/nav_maps" />
+
+        <item
+            android:id="@+id/nav_sell"
+            android:icon="@drawable/ic_shopping_cart_black_24dp"
+            android:title="@string/nav_sell" />
+
+        <item
+            android:id="@+id/nav_mkios"
+            android:icon="@drawable/ic_info_black_24dp"
+            android:title="@string/nav_mkios" />
+
+        <item
+            android:id="@+id/nav_laporan"
+            android:icon="@drawable/ic_receipt_black_24dp"
+            android:title="@string/nav_laporan" />
+    </group>
+
+    <item android:title="Other">
+        <menu>
+            <item
+                android:id="@+id/action_option"
+                android:title="@string/action_option" />
+            <item
+                android:id="@+id/action_sync"
+                android:title="@string/action_sync" />
+        </menu>
+    </item>
+
+
+    <!--<group android:checkableBehavior="single">-->
+        <!--<item-->
+            <!--android:id="@+id/nav_camera"-->
+            <!--android:icon="@drawable/ic_menu_camera"-->
+            <!--android:title="List Rute"/>-->
+        <!--<item-->
+            <!--android:id="@+id/nav_gallery"-->
+            <!--android:icon="@drawable/ic_menu_gallery"-->
+            <!--android:title="Peta Rute"/>-->
+        <!--<item-->
+            <!--android:id="@+id/nav_slideshow"-->
+            <!--android:icon="@drawable/ic_menu_slideshow"-->
+            <!--android:title="Transaksi Penjualan"/>-->
+        <!--<item-->
+            <!--android:id="@+id/nav_transaksi_deposit"-->
+            <!--android:icon="@drawable/ic_menu_slideshow"-->
+            <!--android:title="Transaksi Deposit"/>-->
+        <!--<item-->
+            <!--android:id="@+id/nav_pulsa_reguler"-->
+            <!--android:icon="@drawable/ic_menu_slideshow"-->
+            <!--android:title="Pulsa Reguler"/>-->
+        <!--<item-->
+            <!--android:id="@+id/nav_pulsa_data"-->
+            <!--android:icon="@drawable/ic_menu_slideshow"-->
+            <!--android:title="Pulsa Data"/>-->
+        <!--<item-->
+            <!--android:id="@+id/nav_multi_operator"-->
+            <!--android:icon="@drawable/ic_menu_slideshow"-->
+            <!--android:title="Multi Operator"/>-->
+        <!--<item-->
+            <!--android:id="@+id/nav_informasi_mkios"-->
+            <!--android:icon="@drawable/ic_menu_slideshow"-->
+            <!--android:title="Informasi Mkios"/>-->
+        <!--<item-->
+            <!--android:id="@+id/nav_pembelian_tiket"-->
+            <!--android:icon="@drawable/ic_menu_slideshow"-->
+            <!--android:title="Pembelian Tiket"/>-->
+        <!--<item-->
+            <!--android:id="@+id/nav_manage"-->
+            <!--android:icon="@drawable/ic_menu_manage"-->
+            <!--android:title="Laporan"/>-->
+    <!--</group>-->
+
+    <!--<item android:title="Communicate">-->
+        <!--<menu>-->
+            <!--<item-->
+                <!--android:id="@+id/nav_share"-->
+                <!--android:icon="@drawable/ic_menu_share"-->
+                <!--android:title="Share"/>-->
+            <!--<item-->
+                <!--android:id="@+id/nav_send"-->
+                <!--android:icon="@drawable/ic_menu_send"-->
+                <!--android:title="Send"/>-->
+        <!--</menu>-->
+    <!--</item>-->
+
+</menu>

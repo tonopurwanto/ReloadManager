@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:minHeight="80dp"
+    android:layout_height="wrap_content"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/profile_image"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_person_white_24dp"
+        app:civ_border_overlay="true"
+        app:civ_fill_color="#B3CFD8DC"
+        app:civ_border_width="0dp"
+        app:civ_border_color="#B3757575"/>
+
+    <LinearLayout
+        android:id="@+id/customer_item_text_layout"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="16dp"
+        android:layout_centerVertical="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/customer_item_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Customer Name"
+                android:lineSpacingExtra="8dp"
+                android:textSize="16sp"
+                style="@style/Base.TextAppearance.AppCompat.Body2"/>
+
+            <TextView
+                android:id="@+id/customer_item_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Customer HP"
+                android:lineSpacingExtra="8dp"
+                android:textSize="14sp"
+                android:textColor="#757575"
+                android:layout_below="@+id/customer_item_name"
+                style="@style/Base.TextAppearance.AppCompat.Body1"/>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="79.5dp"
+        android:layout_width="match_parent"
+        android:layout_height=".5dp"
+        android:background="#66969696" />
+
+</RelativeLayout>
