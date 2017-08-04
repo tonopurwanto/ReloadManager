@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 } else if (id == R.id.nav_sell) {
 
                 } else if (id == R.id.nav_mkios) {
-                    
+
                 }
             }
         }, 250);
