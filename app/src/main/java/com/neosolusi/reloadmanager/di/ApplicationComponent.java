@@ -6,6 +6,7 @@ import com.neosolusi.reloadmanager.features.customer.CustomerActivity;
 import com.neosolusi.reloadmanager.features.customer.CustomerFagment;
 import com.neosolusi.reloadmanager.features.login.LoginActivity;
 import com.neosolusi.reloadmanager.features.main.MainActivity;
+import com.neosolusi.reloadmanager.features.pos.TransactionFragment;
 import com.neosolusi.reloadmanager.features.shared.download.DownloadCustomer;
 import com.neosolusi.reloadmanager.features.sync.SyncActivity;
 
@@ -23,6 +24,7 @@ public interface ApplicationComponent
     void inject(SyncActivity target);
     void inject(CustomerActivity target);
     void inject(CustomerFagment target);
+    void inject(TransactionFragment target);
 
     void inject(CustomerRemoteDataSource target);
 

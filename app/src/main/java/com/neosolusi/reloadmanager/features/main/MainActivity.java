@@ -18,6 +18,7 @@ import com.neosolusi.reloadmanager.R;
 import com.neosolusi.reloadmanager.features.customer.CustomerActivity;
 import com.neosolusi.reloadmanager.features.customer.CustomerFagment;
 import com.neosolusi.reloadmanager.features.main.masterdetail.ItemListActivity;
+import com.neosolusi.reloadmanager.features.pos.TransactionActivity;
 import com.neosolusi.reloadmanager.features.pos.grosir.MkiosActivity;
 import com.neosolusi.reloadmanager.features.shared.ActivityUtils;
 
@@ -104,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 } else if (id == R.id.nav_maps) {
 
                 } else if (id == R.id.nav_sell) {
-
+                    startActivity(new Intent(MainActivity.this, TransactionActivity.class));
                 } else if (id == R.id.nav_mkios) {
 
                 }
@@ -114,7 +115,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
 
-        getSupportActionBar().setTitle(item.getTitle());
+//        getSupportActionBar().setTitle(item.getTitle());
 
         return true;
     }

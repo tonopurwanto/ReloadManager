@@ -58,7 +58,14 @@
         </activity>
         <activity android:name=".features.pos.grosir.MkiosActivity">
         </activity>
-        <activity android:name=".features.pos.TransactionActivity">
+        <activity
+            android:name=".features.pos.TransactionActivity"
+            android:label="Pilih Transaksi"
+            android:parentActivityName=".features.main.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.neosolusi.reloadmanager.features.main.MainActivity"/>
         </activity>
     </application>
 

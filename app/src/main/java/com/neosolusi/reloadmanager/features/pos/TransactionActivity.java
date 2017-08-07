@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.neosolusi.reloadmanager.R;
+import com.neosolusi.reloadmanager.features.shared.ActivityUtils;
 
 public class TransactionActivity extends AppCompatActivity
 {
@@ -13,5 +14,7 @@ public class TransactionActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction);
+
+        ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), TransactionFragment.getInstance(), R.id.content);
     }
 }

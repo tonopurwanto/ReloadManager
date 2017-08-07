@@ -10,9 +10,9 @@ public interface TransactionContract
         void showErrorMessage(String message);
     }
 
-    interface Persenter
+    interface Presenter
     {
-        void attachView(TransactionContract.View customerView);
+        void attachView(TransactionContract.View view);
         void detachView();
         void loadMenus();
     }
