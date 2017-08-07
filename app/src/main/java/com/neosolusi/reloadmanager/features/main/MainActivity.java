@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.neosolusi.reloadmanager.R;
+import com.neosolusi.reloadmanager.features.customer.CustomerActivity;
 import com.neosolusi.reloadmanager.features.customer.CustomerFagment;
 import com.neosolusi.reloadmanager.features.main.masterdetail.ItemListActivity;
 import com.neosolusi.reloadmanager.features.pos.grosir.MkiosActivity;
@@ -93,9 +94,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 final int id = item.getItemId();
 
                 if (id == R.id.nav_home) {
-//            startActivity(new Intent(MainActivity.this, CustomerActivity.class));
-                    CustomerFagment fragment = CustomerFagment.getInstance();
-                    ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), fragment, R.id.content);
+                    startActivity(new Intent(MainActivity.this, CustomerActivity.class));
+//                    CustomerFagment fragment = CustomerFagment.getInstance();
+//                    ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), fragment, R.id.content);
                 } else if (id == R.id.nav_profil) {
                     startActivity(new Intent(MainActivity.this, ItemListActivity.class));
                 } else if (id == R.id.nav_list_rute) {
