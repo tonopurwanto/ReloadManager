@@ -4,10 +4,6 @@ import com.neosolusi.reloadmanager.models.Customer;
 
 import java.util.List;
 
-/**
- * Created by tonopurwanto on 30/06/17.
- */
-
 public interface CustomerContract
 {
     interface View
