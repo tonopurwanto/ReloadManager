@@ -58,7 +58,7 @@
         </activity>
         <activity android:name=".features.pos.grosir.MkiosActivity">
         </activity>
-        <activity android:name=".features.transaction.TransactionActivity">
+        <activity android:name=".features.pos.TransactionActivity">
         </activity>
     </application>
 

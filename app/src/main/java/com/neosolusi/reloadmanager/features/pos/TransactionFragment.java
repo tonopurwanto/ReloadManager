@@ -1,4 +1,4 @@
-package com.neosolusi.reloadmanager.features.transaction;
+package com.neosolusi.reloadmanager.features.pos;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

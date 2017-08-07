@@ -1,4 +1,4 @@
-package com.neosolusi.reloadmanager.features.transaction;
+package com.neosolusi.reloadmanager.features.pos;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
