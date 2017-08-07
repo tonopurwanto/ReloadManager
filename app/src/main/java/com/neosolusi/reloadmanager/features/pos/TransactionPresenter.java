@@ -10,16 +10,6 @@ public class TransactionPresenter implements TransactionContract.Presenter
 {
     private TransactionContract.View mView;
 
-    @Override public void attachView(TransactionContract.View view)
-    {
-        this.mView = view;
-    }
-
-    @Override public void detachView()
-    {
-        this.mView = null;
-    }
-
     @Override public void loadMenus()
     {
         List<TransactionItem> menus = new ArrayList<>();
@@ -32,5 +22,20 @@ public class TransactionPresenter implements TransactionContract.Presenter
         menus.add(new TransactionItem(UUID.randomUUID().getMostSignificantBits() + Long.MAX_VALUE, R.drawable.ic_info_black_24dp, "Pembelian Tiket", R.drawable.ic_chevron_right_black_24dp));
 
         mView.showMenus(menus);
+    }
+
+    @Override public void attach(TransactionContract.View view)
+    {
+        this.mView = view;
+    }
+
+    @Override public void detach()
+    {
+        this.mView = null;
+    }
+
+    @Override public void start()
+    {
+        loadMenus();
     }
 }

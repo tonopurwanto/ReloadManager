@@ -24,7 +24,6 @@ public interface ApplicationComponent
     void inject(SyncActivity target);
     void inject(CustomerActivity target);
     void inject(CustomerFagment target);
-    void inject(TransactionFragment target);
 
     void inject(CustomerRemoteDataSource target);
 

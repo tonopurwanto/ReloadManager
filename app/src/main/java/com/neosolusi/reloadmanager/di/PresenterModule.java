@@ -42,10 +42,4 @@ public class PresenterModule
     {
         return new CustomerPresenter(repo, bus);
     }
-
-    @Provides
-    public TransactionContract.Presenter provideTransactionPresenter()
-    {
-        return new TransactionPresenter();
-    }
 }

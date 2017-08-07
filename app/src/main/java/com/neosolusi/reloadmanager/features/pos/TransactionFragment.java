@@ -27,8 +27,7 @@ public class TransactionFragment extends Fragment implements TransactionContract
 {
     private AppCompatActivity mActivity;
     private TransactionAdapter mTransactionAdapter;
-
-    @Inject TransactionContract.Presenter mPresenter;
+    private TransactionContract.Presenter mPresenter;
 
     @BindView(R.id.toolbarTransaction) Toolbar mToolbar;
     @BindView(R.id.listMenus) RecyclerView mRecyclerView;
@@ -48,8 +47,6 @@ public class TransactionFragment extends Fragment implements TransactionContract
     {
         super.onCreate(savedInstanceState);
 
-        ((ReloadManager) getActivity().getApplication()).getComponent().inject(this);
-
         mTransactionAdapter = new TransactionAdapter(getContext());
     }
 
@@ -62,8 +59,8 @@ public class TransactionFragment extends Fragment implements TransactionContract
 
         configureLayout();
 
-        mPresenter.attachView(this);
-        mPresenter.loadMenus();
+        mPresenter.attach(this);
+        mPresenter.start();
 
         return view;
     }
@@ -77,7 +74,7 @@ public class TransactionFragment extends Fragment implements TransactionContract
 
     @Override public void onDetach()
     {
-        mPresenter.detachView();
+        mPresenter.detach();
 
         super.onDetach();
     }
@@ -90,6 +87,11 @@ public class TransactionFragment extends Fragment implements TransactionContract
     @Override public void showErrorMessage(String message)
     {
         // Empty
+    }
+
+    @Override public void setPresenter(TransactionContract.Presenter presenter)
+    {
+        mPresenter = presenter;
     }
 
     private void configureLayout()

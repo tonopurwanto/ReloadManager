@@ -15,6 +15,11 @@ public class TransactionActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction);
 
-        ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), TransactionFragment.getInstance(), R.id.content);
+        TransactionFragment fragment = TransactionFragment.getInstance();
+        ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), fragment, R.id.content);
+
+        TransactionContract.Presenter presenter = new TransactionPresenter();
+
+        fragment.setPresenter(presenter);
     }
 }
