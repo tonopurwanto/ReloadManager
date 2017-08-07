@@ -42,16 +42,14 @@ public class TransactionFragment extends Fragment implements TransactionContract
         return new TransactionFragment();
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState)
+    @Override public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
 
         mTransactionAdapter = new TransactionAdapter(getContext());
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.fragment_transaction, container, false);
 
@@ -60,7 +58,6 @@ public class TransactionFragment extends Fragment implements TransactionContract
         configureLayout();
 
         mPresenter.attach(this);
-        mPresenter.start();
 
         return view;
     }

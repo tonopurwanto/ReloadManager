@@ -40,4 +40,9 @@
     <string name="title_item_list">Items</string>
     <string name="title_item_detail">Item Detail</string>
     <string name="person_image">person image</string>
+    <string name="hint_username">Username</string>
+    <string name="hint_password">Password</string>
+    <string name="btn_log_in">Login</string>
+    <string name="new_account">Don\'t have an Account ?</string>
+    <string name="txt_sign_up">Sign Up</string>
 </resources>

@@ -12,6 +12,8 @@ import com.neosolusi.reloadmanager.features.login.LoginPresenter;
 import com.neosolusi.reloadmanager.features.pos.TransactionContract;
 import com.neosolusi.reloadmanager.features.pos.TransactionPresenter;
 import com.neosolusi.reloadmanager.features.shared.download.DownloadContract;
+import com.neosolusi.reloadmanager.features.signup.SignUpContract;
+import com.neosolusi.reloadmanager.features.signup.SignUpPresenter;
 import com.neosolusi.reloadmanager.features.sync.SyncContract;
 import com.neosolusi.reloadmanager.features.sync.SyncPresenter;
 
@@ -41,5 +43,17 @@ public class PresenterModule
     public CustomerContract.Presenter provideCustomerPresenter(CustomerRepo repo, EventBus bus)
     {
         return new CustomerPresenter(repo, bus);
+    }
+
+    @Provides
+    public TransactionContract.Presenter provideTransactionPresenter()
+    {
+        return new TransactionPresenter();
+    }
+
+    @Provides
+    public SignUpContract.Presenter provideSignUpPresenter()
+    {
+        return new SignUpPresenter();
     }
 }

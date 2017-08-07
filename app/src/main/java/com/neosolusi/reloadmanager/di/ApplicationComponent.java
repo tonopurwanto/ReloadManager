@@ -6,8 +6,11 @@ import com.neosolusi.reloadmanager.features.customer.CustomerActivity;
 import com.neosolusi.reloadmanager.features.customer.CustomerFagment;
 import com.neosolusi.reloadmanager.features.login.LoginActivity;
 import com.neosolusi.reloadmanager.features.main.MainActivity;
+import com.neosolusi.reloadmanager.features.pos.TransactionActivity;
+import com.neosolusi.reloadmanager.features.pos.TransactionAdapter;
 import com.neosolusi.reloadmanager.features.pos.TransactionFragment;
 import com.neosolusi.reloadmanager.features.shared.download.DownloadCustomer;
+import com.neosolusi.reloadmanager.features.signup.SignUpActivity;
 import com.neosolusi.reloadmanager.features.sync.SyncActivity;
 
 import javax.inject.Singleton;
@@ -24,6 +27,9 @@ public interface ApplicationComponent
     void inject(SyncActivity target);
     void inject(CustomerActivity target);
     void inject(CustomerFagment target);
+
+    void inject(TransactionActivity target);
+    void inject(SignUpActivity target);
 
     void inject(CustomerRemoteDataSource target);
 

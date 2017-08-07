@@ -23,7 +23,8 @@
         </activity>
         <activity
             android:name=".features.login.LoginActivity"
-            android:label="@string/title_activity_login">
+            android:label="@string/title_activity_login"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -56,7 +57,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.neosolusi.reloadmanager.features.main.masterdetail.ItemListActivity"/>
         </activity>
-        <activity android:name=".features.pos.grosir.MkiosActivity">
+        <activity
+            android:name=".features.pos.grosir.MkiosActivity">
         </activity>
         <activity
             android:name=".features.pos.TransactionActivity"
@@ -66,6 +68,14 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.neosolusi.reloadmanager.features.main.MainActivity"/>
+        </activity>
+        <activity
+            android:name=".features.signup.SignUpActivity"
+            android:parentActivityName=".features.login.LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.neosolusi.reloadmanager.features.login.LoginActivity"/>
         </activity>
     </application>
 

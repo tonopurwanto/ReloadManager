@@ -1,4 +1,4 @@
-package com.neosolusi.reloadmanager.features.pos;
+package com.neosolusi.reloadmanager.features.signup;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,24 +9,24 @@ import com.neosolusi.reloadmanager.features.shared.ActivityUtils;
 
 import javax.inject.Inject;
 
-public class TransactionActivity extends AppCompatActivity
+public class SignUpActivity extends AppCompatActivity
 {
-    @Inject TransactionContract.Presenter mPresenter;
+    @Inject SignUpContract.Presenter mPresenter;
 
-    private TransactionFragment mView;
+    private SignUpFragment mView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_transaction);
+        setContentView(R.layout.activity_sign_up);
 
         ((ReloadManager) getApplication()).getComponent().inject(this);
 
-        mView = (TransactionFragment) getSupportFragmentManager().findFragmentById(R.id.contentTransaction);
+        mView = (SignUpFragment) getSupportFragmentManager().findFragmentById(R.id.contentSignUp);
         if (mView == null) {
-            mView = TransactionFragment.getInstance();
-            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), mView, R.id.contentTransaction);
+            mView = SignUpFragment.getInstance();
+            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), mView, R.id.contentSignUp);
         }
 
         mView.setPresenter(mPresenter);
@@ -43,7 +43,7 @@ public class TransactionActivity extends AppCompatActivity
     @Override protected void onPause()
     {
         mPresenter.detach();
-
+        
         super.onPause();
     }
 }
