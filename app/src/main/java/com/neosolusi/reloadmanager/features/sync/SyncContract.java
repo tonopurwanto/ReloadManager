@@ -1,11 +1,13 @@
 package com.neosolusi.reloadmanager.features.sync;
 
+import android.support.annotation.NonNull;
+
 public interface SyncContract
 {
     interface View
     {
-        void showMessage(String message);
-        void showSyncFailed(String message);
+        void showMessage(@NonNull String message);
+        void showSyncFailed(@NonNull String message);
         void showSyncFinish();
         void changeProgress(int recordCount);
         void resetProgress();
@@ -14,7 +16,7 @@ public interface SyncContract
     interface Presenter
     {
         void download();
-        void attachView(SyncContract.View syncView);
-        void detachView();
+        void setView(@NonNull SyncContract.View syncView);
+        void unsetView();
     }
 }

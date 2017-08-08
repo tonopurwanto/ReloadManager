@@ -43,6 +43,7 @@
     <string name="hint_username">Username</string>
     <string name="hint_password">Password</string>
     <string name="btn_log_in">Login</string>
+    <string name="btn_log_in_loading">Please wait...</string>
     <string name="new_account">Don\'t have an Account ?</string>
     <string name="txt_sign_up"><u>Sign Up</u></string>
     <string name="signup_info">Reload Manager Mobile akan mengirimkan pesan SMS satu kali untuk memverifikasi nomor ponsel Anda. Biaya SMS Operator mungkin berlaku.</string>

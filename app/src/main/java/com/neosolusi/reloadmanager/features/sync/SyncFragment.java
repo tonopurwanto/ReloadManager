@@ -2,6 +2,8 @@ package com.neosolusi.reloadmanager.features.sync;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -13,7 +15,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.neosolusi.reloadmanager.R;
+import com.neosolusi.reloadmanager.ReloadManager;
 import com.neosolusi.reloadmanager.features.main.MainActivity;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,10 +26,12 @@ import timber.log.Timber;
 
 public class SyncFragment extends Fragment implements SyncContract.View
 {
+    public static final String TAG = "SyncFragment";
+
     @BindView(R.id.downloadStatus) TextView mDownloadStatus;
     @BindView(R.id.downloadProgress) ProgressBar mDownloadProgress;
 
-    private SyncContract.Presenter mPresenter;
+    @Inject SyncContract.Presenter mPresenter;
 
     public SyncFragment()
     {
@@ -34,6 +41,13 @@ public class SyncFragment extends Fragment implements SyncContract.View
     public static SyncFragment getInstance()
     {
         return new SyncFragment();
+    }
+
+    @Override public void onCreate(@Nullable Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+
+        ((ReloadManager) getActivity().getApplication()).getComponent().inject(this);
     }
 
     @Override
@@ -46,27 +60,26 @@ public class SyncFragment extends Fragment implements SyncContract.View
         return view;
     }
 
-    @Override public void onDetach()
-    {
-        mPresenter.detachView();
-
-        super.onDetach();
-    }
-
     @Override public void onResume()
     {
         super.onResume();
 
-        mPresenter.attachView(this);
-        mPresenter.download();
+        mPresenter.setView(this);
     }
 
-    @Override public void showMessage(String message)
+    @Override public void onPause()
+    {
+        mPresenter.unsetView();
+
+        super.onPause();
+    }
+
+    @Override public void showMessage(@NonNull String message)
     {
         mDownloadStatus.setText(message);
     }
 
-    @Override public void showSyncFailed(String message)
+    @Override public void showSyncFailed(@NonNull String message)
     {
         new AlertDialog.Builder(getActivity())
                 .setTitle("Download Failed")

@@ -1,20 +1,20 @@
 package com.neosolusi.reloadmanager.features.pos;
 
-import com.neosolusi.reloadmanager.features.shared.BasePresenterContract;
-import com.neosolusi.reloadmanager.features.shared.BaseViewContract;
+import android.support.annotation.NonNull;
 
 import java.util.List;
 
 public interface TransactionContract
 {
-    interface View extends BaseViewContract<TransactionContract.Presenter>
+    interface View
     {
-        void showMenus(List<TransactionItem> menus);
-        void showErrorMessage(String message);
+        void showMenus(@NonNull List<TransactionItem> menus);
+        void showErrorMessage(@NonNull String message);
     }
 
-    interface Presenter extends BasePresenterContract<TransactionContract.View>
+    interface Presenter
     {
         void loadMenus();
+        void setView(@NonNull TransactionContract.View transactionView);
     }
 }

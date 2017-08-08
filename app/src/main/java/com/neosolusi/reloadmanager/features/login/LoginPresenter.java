@@ -2,6 +2,7 @@ package com.neosolusi.reloadmanager.features.login;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.neosolusi.reloadmanager.R;
@@ -13,6 +14,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import timber.log.Timber;
 
+import static com.google.common.base.Preconditions.checkNotNull;
 import static com.neosolusi.reloadmanager.Constants.API_TOKEN;
 
 public class LoginPresenter implements LoginContract.Presenter
@@ -22,11 +24,11 @@ public class LoginPresenter implements LoginContract.Presenter
     private SharedPreferences mPreferences;
     private LoginContract.View mLoginView;
 
-    public LoginPresenter(Context context, ReloadManagerApi api, SharedPreferences prefs)
+    public LoginPresenter(@NonNull Context context, @NonNull ReloadManagerApi api, @NonNull SharedPreferences prefs)
     {
-        this.mContext = context;
-        this.mReloadManagerApi = api;
-        this.mPreferences = prefs;
+        this.mContext = checkNotNull(context);
+        this.mReloadManagerApi = checkNotNull(api);
+        this.mPreferences = checkNotNull(prefs);
     }
 
     private boolean isUsernameValid()
@@ -37,6 +39,11 @@ public class LoginPresenter implements LoginContract.Presenter
     private boolean isPasswordValid()
     {
         return mLoginView.getPassword().length() > 4;
+    }
+
+    @Override public void setView(@NonNull LoginContract.View loginView)
+    {
+        mLoginView = checkNotNull(loginView);
     }
 
     @Override public void signIn()
@@ -102,18 +109,18 @@ public class LoginPresenter implements LoginContract.Presenter
         mLoginView.showSignUp();
     }
 
-    @Override public void attach(LoginContract.View view)
-    {
-        mLoginView = view;
-    }
-
-    @Override public void detach()
-    {
-        mLoginView = null;
-    }
-
-    @Override public void start()
-    {
-
-    }
+//    @Override public void attach(LoginContract.View view)
+//    {
+//        mLoginView = view;
+//    }
+//
+//    @Override public void detach()
+//    {
+//        mLoginView = null;
+//    }
+//
+//    @Override public void start()
+//    {
+//
+//    }
 }

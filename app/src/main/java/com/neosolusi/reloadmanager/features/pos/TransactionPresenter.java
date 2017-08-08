@@ -1,10 +1,14 @@
 package com.neosolusi.reloadmanager.features.pos;
 
+import android.support.annotation.NonNull;
+
 import com.neosolusi.reloadmanager.R;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class TransactionPresenter implements TransactionContract.Presenter
 {
@@ -21,21 +25,17 @@ public class TransactionPresenter implements TransactionContract.Presenter
         menus.add(new TransactionItem(UUID.randomUUID().getMostSignificantBits() + Long.MAX_VALUE, R.drawable.ic_info_black_24dp, "Informasi MKIOS", R.drawable.ic_chevron_right_black_24dp));
         menus.add(new TransactionItem(UUID.randomUUID().getMostSignificantBits() + Long.MAX_VALUE, R.drawable.ic_airplanemode_active_black_24dp, "Pembelian Tiket", R.drawable.ic_chevron_right_black_24dp));
 
-        mView.showMenus(menus);
+        if (menus.isEmpty()) {
+            mView.showErrorMessage("Menu not found");
+        } else {
+            mView.showMenus(menus);
+        }
     }
 
-    @Override public void attach(TransactionContract.View view)
+    @Override public void setView(@NonNull TransactionContract.View transactionView)
     {
-        this.mView = view;
-    }
+        this.mView = checkNotNull(transactionView);
 
-    @Override public void detach()
-    {
-        this.mView = null;
-    }
-
-    @Override public void start()
-    {
         loadMenus();
     }
 }

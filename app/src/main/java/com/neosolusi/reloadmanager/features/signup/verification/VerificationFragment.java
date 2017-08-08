@@ -1,7 +1,8 @@
 package com.neosolusi.reloadmanager.features.signup.verification;
 
-import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
@@ -13,14 +14,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.neosolusi.reloadmanager.R;
+import com.neosolusi.reloadmanager.ReloadManager;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class VerificationFragment extends Fragment implements VerificationContract.View
 {
-    private VerificationContract.Presenter mPresenter;
-    private AppCompatActivity mActivity;
+    @Inject VerificationContract.Presenter mPresenter;
 
     @BindView(R.id.toolbarVerification) Toolbar mToolbar;
 
@@ -32,6 +35,13 @@ public class VerificationFragment extends Fragment implements VerificationContra
     public static VerificationFragment getInstance()
     {
         return new VerificationFragment();
+    }
+
+    @Override public void onCreate(@Nullable Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+
+        ((ReloadManager) getActivity().getApplication()).getComponent().inject(this);
     }
 
     @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -47,6 +57,7 @@ public class VerificationFragment extends Fragment implements VerificationContra
 
     private void configureLayout()
     {
+        AppCompatActivity mActivity = (AppCompatActivity) getActivity();
         mActivity.setSupportActionBar(mToolbar);
         ActionBar actionBar = mActivity.getSupportActionBar();
         if (actionBar != null) {
@@ -57,26 +68,14 @@ public class VerificationFragment extends Fragment implements VerificationContra
         setHasOptionsMenu(true);
     }
 
-    @Override public void onAttach(Context context)
+    @Override public void onResume()
     {
-        super.onAttach(context);
+        super.onResume();
 
-        mActivity = (AppCompatActivity) getActivity();
+        mPresenter.setView(this);
     }
 
-    @Override public void onDetach()
-    {
-        mPresenter.detach();
-
-        super.onDetach();
-    }
-
-    @Override public void setPresenter(VerificationContract.Presenter presenter)
-    {
-        mPresenter = presenter;
-    }
-
-    @Override public void showErrorMessage(String message)
+    @Override public void showErrorMessage(@NonNull String message)
     {
         new AlertDialog.Builder(getActivity())
                 .setTitle("Failed")

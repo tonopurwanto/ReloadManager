@@ -1,12 +1,9 @@
 package com.neosolusi.reloadmanager.features.customer;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -29,25 +26,24 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class CustomerFagment extends Fragment implements CustomerContract.View
+public class CustomerFragment extends Fragment implements CustomerContract.View
 {
     private List<Customer> mListCustomers;
     private CustomerAdapter mCustomerAdapter;
-    private AppCompatActivity mActivity;
 
     @BindView(R.id.toolbarCustomer) Toolbar mToolbar;
     @BindView(R.id.listCustomer) RecyclerView mRecyclerView;
 
     @Inject CustomerContract.Presenter mPresenter;
 
-    public CustomerFagment()
+    public CustomerFragment()
     {
         // Required empty public constructor
     }
 
-    public static CustomerFagment getInstance()
+    public static CustomerFragment getInstance()
     {
-        return new CustomerFagment();
+        return new CustomerFragment();
     }
 
     @Override public void onCreate(Bundle savedInstanceState)
@@ -67,33 +63,23 @@ public class CustomerFagment extends Fragment implements CustomerContract.View
 
         configureLayout();
 
-        mPresenter.attachView(this);
-        mPresenter.loadCustomers();
-
         return view;
     }
 
-    @Override public void onAttach(Context context)
+    @Override public void onResume()
     {
-        super.onAttach(context);
+        super.onResume();
 
-        mActivity = (AppCompatActivity) getActivity();
+        mPresenter.setView(this);
     }
 
-    @Override public void onDetach()
-    {
-        mPresenter.detachView();
-
-        super.onDetach();
-    }
-
-    @Override public void showCustomers(List<Customer> customers)
+    @Override public void showCustomers(@NonNull List<Customer> customers)
     {
         mListCustomers = customers;
         mCustomerAdapter.updateCustomers(mListCustomers);
     }
 
-    @Override public void showErrorMessage(String message)
+    @Override public void showErrorMessage(@NonNull String message)
     {
 
     }
@@ -110,21 +96,20 @@ public class CustomerFagment extends Fragment implements CustomerContract.View
 
     private void configureLayout()
     {
+        AppCompatActivity mActivity = (AppCompatActivity) getActivity();
         mActivity.setSupportActionBar(mToolbar);
         ActionBar actionBar = mActivity.getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeButtonEnabled(true);
+            actionBar.setTitle("Select customer");
+            actionBar.setSubtitle("24000 peoples");
         }
         setHasOptionsMenu(true);
 
-        mToolbar.setTitle("Select customer");
-        mToolbar.setSubtitle("24000 peoples");
-
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(layoutManager);
-//        mRecyclerView.addItemDecoration(new DividerItemDecoration(mRecyclerView.getContext(),
-//                DividerItemDecoration.VERTICAL));
+//        mRecyclerView.addItemDecoration(new DividerItemDecoration(mRecyclerView.getContext(), DividerItemDecoration.VERTICAL));
         mRecyclerView.setAdapter(mCustomerAdapter);
         mRecyclerView.setHasFixedSize(true);
 

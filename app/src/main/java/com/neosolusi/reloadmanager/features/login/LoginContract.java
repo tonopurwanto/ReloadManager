@@ -1,14 +1,13 @@
 package com.neosolusi.reloadmanager.features.login;
 
-import com.neosolusi.reloadmanager.features.shared.BasePresenterContract;
-import com.neosolusi.reloadmanager.features.shared.BaseViewContract;
+import android.support.annotation.NonNull;
 
 public interface LoginContract
 {
-    interface View extends BaseViewContract<LoginContract.Presenter>
+    interface View
     {
         void showLoginSuccess();
-        void showLoginFailed(String message);
+        void showLoginFailed(@NonNull String message);
         void showLoading(boolean show);
         void showSignUp();
         void setActiveForm(boolean active);
@@ -16,8 +15,9 @@ public interface LoginContract
         String getPassword();
     }
 
-    interface Presenter extends BasePresenterContract<LoginContract.View>
+    interface Presenter
     {
+        void setView(@NonNull LoginContract.View loginView);
         void signIn();
         void signUp();
     }

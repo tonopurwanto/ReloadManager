@@ -1,16 +1,15 @@
 package com.neosolusi.reloadmanager.features.customer;
 
+import android.support.annotation.NonNull;
+
 import com.neosolusi.reloadmanager.data.CustomerRepo;
 import com.neosolusi.reloadmanager.features.shared.events.customer.CustomersLoadedSuccessfulEvent;
 import com.neosolusi.reloadmanager.features.shared.events.customer.CustomersLoadingErrorEvent;
-import com.neosolusi.reloadmanager.features.shared.events.download.DownloadCompleteEvent;
-import com.neosolusi.reloadmanager.features.shared.events.download.DownloadFailedEvent;
-import com.neosolusi.reloadmanager.models.Customer;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import java.util.List;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class CustomerPresenter implements CustomerContract.Presenter
 {
@@ -18,20 +17,22 @@ public class CustomerPresenter implements CustomerContract.Presenter
     private CustomerRepo mCustomerRepo;
     private EventBus mEventBus;
 
-    public CustomerPresenter(CustomerRepo repo, EventBus bus)
+    public CustomerPresenter(@NonNull CustomerRepo repo, @NonNull EventBus bus)
     {
-        this.mCustomerRepo = repo;
-        this.mEventBus = bus;
+        this.mCustomerRepo = checkNotNull(repo);
+        this.mEventBus = checkNotNull(bus);
     }
 
-    @Override public void attachView(CustomerContract.View customerView)
+    @Override public void setView(@NonNull CustomerContract.View customerView)
     {
-        this.mCustomerView = customerView;
+        this.mCustomerView = checkNotNull(customerView);
 
         mEventBus.register(this);
+
+        loadCustomers();
     }
 
-    @Override public void detachView()
+    @Override public void unsetView()
     {
         this.mCustomerView = null;
 

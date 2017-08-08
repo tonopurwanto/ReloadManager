@@ -1,5 +1,7 @@
 package com.neosolusi.reloadmanager.features.customer;
 
+import android.support.annotation.NonNull;
+
 import com.neosolusi.reloadmanager.models.Customer;
 
 import java.util.List;
@@ -8,8 +10,8 @@ public interface CustomerContract
 {
     interface View
     {
-        void showCustomers(List<Customer> customers);
-        void showErrorMessage(String message);
+        void showCustomers(@NonNull List<Customer> customers);
+        void showErrorMessage(@NonNull String message);
         void refresh();
         void addCustomer();
 
@@ -17,8 +19,8 @@ public interface CustomerContract
 
     interface Presenter
     {
-        void attachView(CustomerContract.View customerView);
-        void detachView();
+        void setView(@NonNull CustomerContract.View customerView);
+        void unsetView();
         void loadCustomers();
     }
 }

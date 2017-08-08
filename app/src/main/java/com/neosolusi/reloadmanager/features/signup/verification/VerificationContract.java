@@ -1,17 +1,20 @@
 package com.neosolusi.reloadmanager.features.signup.verification;
 
+import android.support.annotation.NonNull;
+
 import com.neosolusi.reloadmanager.features.shared.BasePresenterContract;
 import com.neosolusi.reloadmanager.features.shared.BaseViewContract;
 
 public interface VerificationContract
 {
-    interface View extends BaseViewContract<VerificationContract.Presenter>
+    interface View
     {
-        void showErrorMessage(String message);
+        void showErrorMessage(@NonNull String message);
     }
 
-    interface Presenter extends BasePresenterContract<VerificationContract.View>
+    interface Presenter
     {
+        void setView(@NonNull VerificationContract.View verificationView);
         void performVerification();
     }
 }

@@ -1,5 +1,7 @@
 package com.neosolusi.reloadmanager.features.sync;
 
+import android.support.annotation.NonNull;
+
 import com.neosolusi.reloadmanager.features.shared.download.DownloadContract;
 import com.neosolusi.reloadmanager.features.shared.events.download.DownloadCompleteEvent;
 import com.neosolusi.reloadmanager.features.shared.events.download.DownloadFailedEvent;
@@ -10,16 +12,18 @@ import org.greenrobot.eventbus.Subscribe;
 import java.util.Iterator;
 import java.util.List;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 public class SyncPresenter implements SyncContract.Presenter
 {
     private SyncContract.View mSyncView;
     private EventBus mEventBus;
     private Iterator<DownloadContract> mDataSyncIterator;
 
-    public SyncPresenter(List<DownloadContract> dataSync, EventBus bus)
+    public SyncPresenter(@NonNull List<DownloadContract> dataSync, @NonNull EventBus bus)
     {
-        this.mDataSyncIterator = dataSync.iterator();
-        this.mEventBus = bus;
+        this.mDataSyncIterator = checkNotNull(dataSync.iterator());
+        this.mEventBus = checkNotNull(bus);
     }
 
     @Override public void download()
@@ -36,14 +40,16 @@ public class SyncPresenter implements SyncContract.Presenter
         }
     }
 
-    @Override public void attachView(SyncContract.View syncView)
+    @Override public void setView(@NonNull SyncContract.View syncView)
     {
-        mSyncView = syncView;
+        this.mSyncView = checkNotNull(syncView);
 
-        mEventBus.register(this);
+        this.mEventBus.register(this);
+
+        download();
     }
 
-    @Override public void detachView()
+    @Override public void unsetView()
     {
         mSyncView = null;
 

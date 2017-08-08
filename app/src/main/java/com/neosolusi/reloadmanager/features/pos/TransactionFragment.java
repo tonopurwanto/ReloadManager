@@ -1,7 +1,7 @@
 package com.neosolusi.reloadmanager.features.pos;
 
-import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -14,17 +14,20 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.neosolusi.reloadmanager.R;
+import com.neosolusi.reloadmanager.ReloadManager;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class TransactionFragment extends Fragment implements TransactionContract.View
 {
-    private AppCompatActivity mActivity;
     private TransactionAdapter mTransactionAdapter;
-    private TransactionContract.Presenter mPresenter;
+
+    @Inject TransactionContract.Presenter mPresenter;
 
     @BindView(R.id.toolbarTransaction) Toolbar mToolbar;
     @BindView(R.id.listMenus) RecyclerView mRecyclerView;
@@ -43,6 +46,8 @@ public class TransactionFragment extends Fragment implements TransactionContract
     {
         super.onCreate(savedInstanceState);
 
+        ((ReloadManager) getActivity().getApplication()).getComponent().inject(this);
+
         mTransactionAdapter = new TransactionAdapter(getContext());
     }
 
@@ -54,51 +59,37 @@ public class TransactionFragment extends Fragment implements TransactionContract
 
         configureLayout();
 
-        mPresenter.attach(this);
-
         return view;
     }
 
-    @Override public void onAttach(Context context)
+    @Override public void onResume()
     {
-        super.onAttach(context);
+        super.onResume();
 
-        mActivity = (AppCompatActivity) getActivity();
+        mPresenter.setView(this);
     }
 
-    @Override public void onDetach()
-    {
-        mPresenter.detach();
-
-        super.onDetach();
-    }
-
-    @Override public void showMenus(List<TransactionItem> menus)
+    @Override public void showMenus(@NonNull List<TransactionItem> menus)
     {
         mTransactionAdapter.update(menus);
     }
 
-    @Override public void showErrorMessage(String message)
+    @Override public void showErrorMessage(@NonNull String message)
     {
         // Empty
     }
 
-    @Override public void setPresenter(TransactionContract.Presenter presenter)
-    {
-        mPresenter = presenter;
-    }
-
     private void configureLayout()
     {
+        AppCompatActivity mActivity = (AppCompatActivity) getActivity();
         mActivity.setSupportActionBar(mToolbar);
         ActionBar actionBar = mActivity.getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeButtonEnabled(true);
+            actionBar.setTitle("Pilih Transaksi");
         }
         setHasOptionsMenu(true);
-
-        mToolbar.setTitle("Pilih Transaksi");
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(mRecyclerView.getContext(), DividerItemDecoration.VERTICAL));

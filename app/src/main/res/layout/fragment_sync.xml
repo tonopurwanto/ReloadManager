@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.neosolusi.reloadmanager.features.sync.SyncActivity">
+    tools:context="com.neosolusi.reloadmanager.features.sync.SyncFragment"
+    tools:showIn="@layout/activity_login">
 
     <TextView
         android:id="@+id/downloadStatus"

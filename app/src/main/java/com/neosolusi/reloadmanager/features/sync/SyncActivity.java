@@ -1,6 +1,7 @@
 package com.neosolusi.reloadmanager.features.sync;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -21,7 +22,7 @@ import timber.log.Timber;
 
 public class SyncActivity extends AppCompatActivity implements SyncContract.View
 {
-    @Inject SyncContract.Presenter mPresenter;
+//    @Inject SyncContract.Presenter mPresenter;
 
     @BindView(R.id.downloadStatus) TextView mDownloadStatus;
     @BindView(R.id.downloadProgress) ProgressBar mDownloadProgress;
@@ -33,15 +34,15 @@ public class SyncActivity extends AppCompatActivity implements SyncContract.View
         setContentView(R.layout.activity_sync);
 
         ButterKnife.bind(this);
-        ((ReloadManager) getApplication()).getComponent().inject(this);
+//        ((ReloadManager) getApplication()).getComponent().inject(this);
     }
 
-    @Override public void showMessage(String message)
+    @Override public void showMessage(@NonNull String message)
     {
         mDownloadStatus.setText(message);
     }
 
-    @Override public void showSyncFailed(String message)
+    @Override public void showSyncFailed(@NonNull String message)
     {
         new AlertDialog.Builder(this)
                 .setTitle("Download Failed")
@@ -86,13 +87,13 @@ public class SyncActivity extends AppCompatActivity implements SyncContract.View
     {
         super.onResume();
 
-        mPresenter.attachView(this);
-        mPresenter.download();
+//        mPresenter.attachView(this);
+//        mPresenter.download();
     }
 
     @Override protected void onPause()
     {
-        mPresenter.detachView();
+//        mPresenter.detachView();
 
         super.onPause();
     }

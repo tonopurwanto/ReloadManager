@@ -2,6 +2,7 @@ package com.neosolusi.reloadmanager.di;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
 
 import com.neosolusi.reloadmanager.data.CustomerRepo;
 import com.neosolusi.reloadmanager.data.ReloadManagerApi;
@@ -30,19 +31,19 @@ import dagger.Provides;
 public class PresenterModule
 {
     @Provides
-    public LoginContract.Presenter provideLoginPresenter(Context context, ReloadManagerApi api, SharedPreferences prefs)
+    public LoginContract.Presenter provideLoginPresenter(@NonNull Context context, @NonNull ReloadManagerApi api, @NonNull SharedPreferences prefs)
     {
         return new LoginPresenter(context, api, prefs);
     }
 
     @Provides
-    public SyncContract.Presenter provideSyncPresenter(List<DownloadContract> dataSync, EventBus bus)
+    public SyncContract.Presenter provideSyncPresenter(@NonNull List<DownloadContract> dataSync, @NonNull EventBus bus)
     {
         return new SyncPresenter(dataSync, bus);
     }
 
     @Provides
-    public CustomerContract.Presenter provideCustomerPresenter(CustomerRepo repo, EventBus bus)
+    public CustomerContract.Presenter provideCustomerPresenter(@NonNull CustomerRepo repo, @NonNull EventBus bus)
     {
         return new CustomerPresenter(repo, bus);
     }

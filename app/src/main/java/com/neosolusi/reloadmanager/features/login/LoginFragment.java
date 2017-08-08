@@ -1,9 +1,10 @@
 package com.neosolusi.reloadmanager.features.login;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -15,11 +16,14 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.neosolusi.reloadmanager.R;
+import com.neosolusi.reloadmanager.ReloadManager;
 import com.neosolusi.reloadmanager.features.signup.SignUpActivity;
-import com.neosolusi.reloadmanager.features.sync.SyncActivity;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,13 +32,16 @@ import timber.log.Timber;
 
 public class LoginFragment extends Fragment implements LoginContract.View, TextView.OnEditorActionListener
 {
+    public static final String TAG = "LoginFragment";
+
+    @Inject LoginContract.Presenter mPresenter;
+
     @BindView(R.id.input_username) EditText mTextUsername;
     @BindView(R.id.input_password) EditText mTextPassword;
     @BindView(R.id.txt_signup) TextView mTextSignUp;
     @BindView(R.id.btn_login) Button mButtonLogin;
 
-    private LoginContract.Presenter mPresenter;
-    private ProgressDialog mDialogSignIn;
+    @BindView(R.id.progressBarLogin) ProgressBar mProgressBar;
     private OnFragmentInteractionListener mActivityListener;
 
     public LoginFragment()
@@ -45,6 +52,13 @@ public class LoginFragment extends Fragment implements LoginContract.View, TextV
     public static LoginFragment getInstance()
     {
         return new LoginFragment();
+    }
+
+    @Override public void onCreate(@Nullable Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+
+        ((ReloadManager) getActivity().getApplication()).getComponent().inject(this);
     }
 
     @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -66,15 +80,14 @@ public class LoginFragment extends Fragment implements LoginContract.View, TextV
             }
         });
 
-        mDialogSignIn = new ProgressDialog(getContext());
-        mDialogSignIn.setTitle("Sign In");
-        mDialogSignIn.setMessage("Mohon tunggu");
-        mDialogSignIn.setCancelable(false);
-        mDialogSignIn.setIndeterminate(true);
-        mDialogSignIn.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        mDialogSignIn.setIcon(R.drawable.ic_info_black_24dp);
-
         return view;
+    }
+
+    @Override public void onResume()
+    {
+        super.onResume();
+
+        mPresenter.setView(this);
     }
 
     @Override public void onAttach(Context context)
@@ -105,7 +118,7 @@ public class LoginFragment extends Fragment implements LoginContract.View, TextV
 //        getActivity().finish();
     }
 
-    @Override public void showLoginFailed(String message)
+    @Override public void showLoginFailed(@NonNull String message)
     {
         new AlertDialog.Builder(getActivity())
                 .setTitle("Failed")
@@ -121,9 +134,11 @@ public class LoginFragment extends Fragment implements LoginContract.View, TextV
             @Override public void run()
             {
                 if (show) {
-                    mDialogSignIn.show();
+                    mProgressBar.setVisibility(ProgressBar.VISIBLE);
+                    mButtonLogin.setText(getResources().getString(R.string.btn_log_in_loading));
                 } else {
-                    mDialogSignIn.dismiss();
+                    mProgressBar.setVisibility(ProgressBar.GONE);
+                    mButtonLogin.setText(getResources().getString(R.string.btn_log_in));
                 }
             }
         });
@@ -178,11 +193,6 @@ public class LoginFragment extends Fragment implements LoginContract.View, TextV
 
         mPresenter.signIn();
 
-    }
-
-    @Override public void setPresenter(LoginContract.Presenter presenter)
-    {
-        mPresenter = presenter;
     }
 
     public interface OnFragmentInteractionListener

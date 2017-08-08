@@ -1,9 +1,9 @@
 package com.neosolusi.reloadmanager.features.signup;
 
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
@@ -16,10 +16,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.neosolusi.reloadmanager.R;
+import com.neosolusi.reloadmanager.ReloadManager;
 import com.neosolusi.reloadmanager.features.signup.verification.VerificationActivity;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,8 +29,7 @@ import butterknife.OnClick;
 
 public class SignUpFragment extends Fragment implements SignUpContract.View
 {
-    private SignUpContract.Presenter mPresenter;
-    private AppCompatActivity mActivity;
+    @Inject SignUpContract.Presenter mPresenter;
 
     @BindView(R.id.toolbarSignUp) Toolbar mToolbar;
     @BindView(R.id.textPhone) EditText mTextPhone;
@@ -44,6 +45,13 @@ public class SignUpFragment extends Fragment implements SignUpContract.View
         return new SignUpFragment();
     }
 
+    @Override public void onCreate(@Nullable Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+
+        ((ReloadManager) getActivity().getApplication()).getComponent().inject(this);
+    }
+
     @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.fragment_sign_up, container, false);
@@ -55,36 +63,24 @@ public class SignUpFragment extends Fragment implements SignUpContract.View
         return view;
     }
 
-    @Override public void setPresenter(SignUpContract.Presenter presenter)
+    @Override public void onResume()
     {
-        mPresenter = presenter;
-    }
+        super.onResume();
 
-    @Override public void onAttach(Context context)
-    {
-        super.onAttach(context);
-
-        mActivity = (AppCompatActivity) getActivity();
-    }
-
-    @Override public void onDetach()
-    {
-        mPresenter.detach();
-
-        super.onDetach();
+        mPresenter.setView(this);
     }
 
     private void configureLayout()
     {
+        AppCompatActivity mActivity = (AppCompatActivity) getActivity();
         mActivity.setSupportActionBar(mToolbar);
         ActionBar actionBar = mActivity.getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeButtonEnabled(true);
+            actionBar.setTitle("Sign Up");
         }
         setHasOptionsMenu(true);
-
-        mActivity.getSupportActionBar().setTitle("Sign Up");
     }
 
     @Override public String getPhone()
@@ -98,7 +94,7 @@ public class SignUpFragment extends Fragment implements SignUpContract.View
         mPresenter.signUp();
     }
 
-    @Override public void showErrorMessage(String message)
+    @Override public void showErrorMessage(@NonNull String message)
     {
         new AlertDialog.Builder(getActivity())
                 .setTitle("Failed")
@@ -112,7 +108,7 @@ public class SignUpFragment extends Fragment implements SignUpContract.View
         startActivity(new Intent(getActivity(), VerificationActivity.class));
     }
 
-    @Override public void showSignUpDialog(String phone)
+    @Override public void showSignUpDialog(@NonNull String phone)
     {
         final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
 

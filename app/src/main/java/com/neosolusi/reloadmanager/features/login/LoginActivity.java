@@ -1,6 +1,7 @@
 package com.neosolusi.reloadmanager.features.login;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
@@ -14,52 +15,34 @@ import javax.inject.Inject;
 
 public class LoginActivity extends AppCompatActivity implements LoginFragment.OnFragmentInteractionListener
 {
-    @Inject LoginContract.Presenter mPresenter;
-    @Inject SyncContract.Presenter mSyncPresenter;
-
-    private LoginFragment mView;
     private SyncFragment mViewSync;
+    private LoginFragment mViewLogin;
 
     @Override protected void onCreate(@Nullable Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        ((ReloadManager) getApplication()).getComponent().inject(this);
-
-        mView = (LoginFragment) getSupportFragmentManager().findFragmentById(R.id.contentLogin);
-        if (mView == null) {
-            mView = LoginFragment.getInstance();
-            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), mView, R.id.contentLogin);
+        mViewLogin = (LoginFragment) getSupportFragmentManager().findFragmentByTag(LoginFragment.TAG);
+        if (mViewLogin == null) {
+            mViewLogin = LoginFragment.getInstance();
+            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), mViewLogin, R.id.contentLogin);
         }
-
-        mView.setPresenter(mPresenter);
-    }
-
-    @Override protected void onResume()
-    {
-        super.onResume();
-
-        mPresenter.attach(mView);
-        mPresenter.start();
-    }
-
-    @Override protected void onPause()
-    {
-        mPresenter.detach();
-
-        super.onPause();
     }
 
     @Override public void onSwitchView()
     {
-//        mViewSync = (SyncFragment) getSupportFragmentManager().findFragmentById(R.id.contentLogin);
-        if (mViewSync == null) {
-            mViewSync = SyncFragment.getInstance();
-            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), mViewSync, R.id.contentLogin);
-        }
-
-        mViewSync.setPresenter(mSyncPresenter);
+        new Handler().postDelayed(new Runnable()
+        {
+            @Override public void run()
+            {
+                mViewSync = (SyncFragment) getSupportFragmentManager().findFragmentByTag(SyncFragment.TAG);
+                if (mViewSync == null) {
+                    mViewSync = SyncFragment.getInstance();
+                    ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), mViewSync, R.id.contentLogin);
+                }
+            }
+        }, 250);
     }
 
     //    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)

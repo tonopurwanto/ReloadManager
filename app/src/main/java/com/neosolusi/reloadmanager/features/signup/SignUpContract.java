@@ -1,21 +1,21 @@
 package com.neosolusi.reloadmanager.features.signup;
 
-import com.neosolusi.reloadmanager.features.shared.BasePresenterContract;
-import com.neosolusi.reloadmanager.features.shared.BaseViewContract;
+import android.support.annotation.NonNull;
 
 public interface SignUpContract
 {
-    interface View extends BaseViewContract<SignUpContract.Presenter>
+    interface View
     {
         String getPhone();
         void signUp();
-        void showErrorMessage(String message);
+        void showErrorMessage(@NonNull String message);
         void showSignUpResult();
-        void showSignUpDialog(String phone);
+        void showSignUpDialog(@NonNull String phone);
     }
 
-    interface Presenter extends BasePresenterContract<SignUpContract.View>
+    interface Presenter
     {
         void signUp();
+        void setView(@NonNull SignUpContract.View signupView);
     }
 }

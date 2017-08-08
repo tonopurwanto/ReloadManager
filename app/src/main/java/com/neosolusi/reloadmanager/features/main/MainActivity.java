@@ -16,11 +16,9 @@ import android.view.MenuItem;
 
 import com.neosolusi.reloadmanager.R;
 import com.neosolusi.reloadmanager.features.customer.CustomerActivity;
-import com.neosolusi.reloadmanager.features.customer.CustomerFagment;
 import com.neosolusi.reloadmanager.features.main.masterdetail.ItemListActivity;
 import com.neosolusi.reloadmanager.features.pos.TransactionActivity;
 import com.neosolusi.reloadmanager.features.pos.grosir.MkiosActivity;
-import com.neosolusi.reloadmanager.features.shared.ActivityUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -56,8 +54,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         mNavigationView.setNavigationItemSelectedListener(this);
 
-        MainFragment fragment = MainFragment.getInstance();
-        ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), fragment, R.id.content);
+//        MainFragment fragment = MainFragment.getInstance();
+//        ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), fragment, R.id.content);
     }
 
     @Override public void onBackPressed()
