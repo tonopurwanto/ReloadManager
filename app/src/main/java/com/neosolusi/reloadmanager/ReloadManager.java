@@ -34,7 +34,7 @@ public class ReloadManager extends Application
         RealmConfiguration realmConfiguration = new RealmConfiguration.Builder()
                 .name("reloadmanager.realm")
                 .build();
-//        Realm.deleteRealm(realmConfiguration); // Clean slate
+        Realm.deleteRealm(realmConfiguration); // Clean slate
         Realm.setDefaultConfiguration(realmConfiguration);
 
         // Stetho Realm browser configuration

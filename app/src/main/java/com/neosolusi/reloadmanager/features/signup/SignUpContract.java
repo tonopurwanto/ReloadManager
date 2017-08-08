@@ -11,6 +11,7 @@ public interface SignUpContract
         void signUp();
         void showErrorMessage(String message);
         void showSignUpResult();
+        void showSignUpDialog(String phone);
     }
 
     interface Presenter extends BasePresenterContract<SignUpContract.View>

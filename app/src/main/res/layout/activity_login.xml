@@ -1,12 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/contentLogin"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.neosolusi.reloadmanager.features.login.LoginActivity"/>
-<!--<LinearLayout-->
+    android:fitsSystemWindows="true"
+    tools:context="com.neosolusi.reloadmanager.features.login.LoginActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:orientation="vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="60dp">
+
+        <ImageView
+            android:id="@+id/img_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="80dp"
+            android:contentDescription="@string/image_logo_big"
+            android:src="@drawable/rm"/>
+
+        <FrameLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/contentLogin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context="com.neosolusi.reloadmanager.features.login.LoginActivity"/>
+
+    </LinearLayout>
+</android.support.design.widget.CoordinatorLayout>
+    <!--<LinearLayout-->
     <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
     <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
     <!--xmlns:tools="http://schemas.android.com/tools"-->
@@ -22,74 +51,74 @@
 
     <!--&lt;!&ndash; Login progress &ndash;&gt;-->
     <!--<ProgressBar-->
-        <!--android:id="@+id/login_progress"-->
-        <!--style="?android:attr/progressBarStyleHorizontal"-->
-        <!--android:layout_width="256dp"-->
-        <!--android:layout_height="16dp"-->
-        <!--android:layout_gravity="center"-->
-        <!--android:layout_marginBottom="8dp"-->
-        <!--android:foregroundGravity="center"-->
-        <!--android:indeterminate="true"-->
-        <!--android:indeterminateTint="@color/colorAccent"-->
-        <!--android:indeterminateTintMode="multiply"-->
-        <!--android:visibility="gone"/>-->
+    <!--android:id="@+id/login_progress"-->
+    <!--style="?android:attr/progressBarStyleHorizontal"-->
+    <!--android:layout_width="256dp"-->
+    <!--android:layout_height="16dp"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:layout_marginBottom="8dp"-->
+    <!--android:foregroundGravity="center"-->
+    <!--android:indeterminate="true"-->
+    <!--android:indeterminateTint="@color/colorAccent"-->
+    <!--android:indeterminateTintMode="multiply"-->
+    <!--android:visibility="gone"/>-->
 
     <!--<ScrollView-->
-        <!--android:id="@+id/login_form"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent">-->
+    <!--android:id="@+id/login_form"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
 
-        <!--<LinearLayout-->
-            <!--android:id="@+id/email_login_form"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:orientation="vertical">-->
+    <!--<LinearLayout-->
+    <!--android:id="@+id/email_login_form"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="vertical">-->
 
-            <!--<android.support.design.widget.TextInputLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content">-->
+    <!--<android.support.design.widget.TextInputLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content">-->
 
-                <!--<AutoCompleteTextView-->
-                    <!--android:id="@+id/email"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:hint="@string/prompt_email"-->
-                    <!--android:inputType="textEmailAddress"-->
-                    <!--android:maxLines="1"-->
-                    <!--android:text="@string/default_email"/>-->
+    <!--<AutoCompleteTextView-->
+    <!--android:id="@+id/email"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:hint="@string/prompt_email"-->
+    <!--android:inputType="textEmailAddress"-->
+    <!--android:maxLines="1"-->
+    <!--android:text="@string/default_email"/>-->
 
-            <!--</android.support.design.widget.TextInputLayout>-->
+    <!--</android.support.design.widget.TextInputLayout>-->
 
-            <!--<android.support.design.widget.TextInputLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--app:passwordToggleEnabled="true"-->
-                <!--app:passwordToggleTint="@color/colorAccent"-->
-                <!--app:passwordToggleTintMode="multiply">-->
+    <!--<android.support.design.widget.TextInputLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--app:passwordToggleEnabled="true"-->
+    <!--app:passwordToggleTint="@color/colorAccent"-->
+    <!--app:passwordToggleTintMode="multiply">-->
 
-                <!--<EditText-->
-                    <!--android:id="@+id/password"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:hint="@string/prompt_password"-->
-                    <!--android:imeActionId="@+id/login"-->
-                    <!--android:imeActionLabel="@string/action_sign_in_short"-->
-                    <!--android:imeOptions="actionUnspecified"-->
-                    <!--android:inputType="textPassword"-->
-                    <!--android:maxLines="1"-->
-                    <!--android:text="@string/default_password"/>-->
+    <!--<EditText-->
+    <!--android:id="@+id/password"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:hint="@string/prompt_password"-->
+    <!--android:imeActionId="@+id/login"-->
+    <!--android:imeActionLabel="@string/action_sign_in_short"-->
+    <!--android:imeOptions="actionUnspecified"-->
+    <!--android:inputType="textPassword"-->
+    <!--android:maxLines="1"-->
+    <!--android:text="@string/default_password"/>-->
 
-            <!--</android.support.design.widget.TextInputLayout>-->
+    <!--</android.support.design.widget.TextInputLayout>-->
 
-            <!--<Button-->
-                <!--android:id="@+id/email_sign_in_button"-->
-                <!--style="?android:textAppearanceSmall"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginTop="16dp"-->
-                <!--android:text="@string/action_sign_in"-->
-                <!--android:textStyle="bold"/>-->
+    <!--<Button-->
+    <!--android:id="@+id/email_sign_in_button"-->
+    <!--style="?android:textAppearanceSmall"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="16dp"-->
+    <!--android:text="@string/action_sign_in"-->
+    <!--android:textStyle="bold"/>-->
 
-        <!--</LinearLayout>-->
+    <!--</LinearLayout>-->
     <!--</ScrollView>-->
-<!--</LinearLayout>-->
+    <!--</LinearLayout>-->

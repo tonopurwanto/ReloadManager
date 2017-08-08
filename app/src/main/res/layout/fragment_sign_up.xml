@@ -81,6 +81,7 @@
                         android:layout_marginLeft="16dp"
                         android:layout_weight="0.06"
                         android:ems="10"
+                        android:maxLength="13"
                         android:inputType="phone"
                         android:textAlignment="textStart"
                         android:textColor="?attr/colorControlNormal"

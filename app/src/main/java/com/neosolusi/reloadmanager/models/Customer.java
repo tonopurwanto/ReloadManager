@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
+import java.util.UUID;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
@@ -139,6 +140,11 @@ public class Customer extends RealmObject implements Parcelable
     public void setUpdated_at(Date updated_at)
     {
         this.updated_at = updated_at;
+    }
+
+    public static Long generateID()
+    {
+        return UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
     }
 
     @Override public String toString()

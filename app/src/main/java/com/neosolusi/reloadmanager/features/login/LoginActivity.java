@@ -7,14 +7,18 @@ import android.support.v7.app.AppCompatActivity;
 import com.neosolusi.reloadmanager.R;
 import com.neosolusi.reloadmanager.ReloadManager;
 import com.neosolusi.reloadmanager.features.shared.ActivityUtils;
+import com.neosolusi.reloadmanager.features.sync.SyncContract;
+import com.neosolusi.reloadmanager.features.sync.SyncFragment;
 
 import javax.inject.Inject;
 
-public class LoginActivity extends AppCompatActivity
+public class LoginActivity extends AppCompatActivity implements LoginFragment.OnFragmentInteractionListener
 {
     @Inject LoginContract.Presenter mPresenter;
+    @Inject SyncContract.Presenter mSyncPresenter;
 
     private LoginFragment mView;
+    private SyncFragment mViewSync;
 
     @Override protected void onCreate(@Nullable Bundle savedInstanceState)
     {
@@ -45,6 +49,17 @@ public class LoginActivity extends AppCompatActivity
         mPresenter.detach();
 
         super.onPause();
+    }
+
+    @Override public void onSwitchView()
+    {
+//        mViewSync = (SyncFragment) getSupportFragmentManager().findFragmentById(R.id.contentLogin);
+        if (mViewSync == null) {
+            mViewSync = SyncFragment.getInstance();
+            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), mViewSync, R.id.contentLogin);
+        }
+
+        mViewSync.setPresenter(mSyncPresenter);
     }
 
     //    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)

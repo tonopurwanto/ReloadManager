@@ -9,8 +9,8 @@ public class ActivityUtils
     public static void addFragmentToActivity(FragmentManager fragmentManager, Fragment fragment, int frameId)
     {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-//        transaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
-        transaction.add(frameId, fragment);
+//        transaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+        transaction.replace(frameId, fragment);
         transaction.commit();
     }
 }

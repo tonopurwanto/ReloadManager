@@ -18,7 +18,7 @@ import butterknife.ButterKnife;
 
 public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHolder>
 {
-    private List<Customer> mCustomers = Collections.EMPTY_LIST;
+    private List<Customer> mCustomers = Collections.emptyList();
 
     public CustomerAdapter()
     {

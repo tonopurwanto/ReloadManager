@@ -61,7 +61,8 @@ public class LoginPresenter implements LoginContract.Presenter
 
         // Show a progress spinner, and kick off a background task to
         // perform the user login attempt.
-//        mLoginView.showLoading(true);
+        mLoginView.showLoading(true);
+        mLoginView.setActiveForm(false);
 
         mReloadManagerApi.login(username, password).enqueue(new Callback<Wrapper>()
         {
@@ -81,12 +82,14 @@ public class LoginPresenter implements LoginContract.Presenter
                     Timber.e("Login failed", "code: " + response.code() + " message: " + response.message());
                 }
 
-//                mLoginView.showLoading(false);
+                mLoginView.showLoading(false);
+                mLoginView.setActiveForm(true);
             }
 
             @Override public void onFailure(Call<Wrapper> call, Throwable t)
             {
-//                mLoginView.showLoading(false);
+                mLoginView.setActiveForm(true);
+                mLoginView.showLoading(false);
                 mLoginView.showLoginFailed("Login Failed");
 
                 Timber.e(t, "Unable to load the customers data from API");
@@ -97,16 +100,6 @@ public class LoginPresenter implements LoginContract.Presenter
     @Override public void signUp()
     {
         mLoginView.showSignUp();
-    }
-
-    @Override public void attachView(LoginContract.View loginView)
-    {
-        mLoginView = loginView;
-    }
-
-    @Override public void detachView()
-    {
-        mLoginView = null;
     }
 
     @Override public void attach(LoginContract.View view)

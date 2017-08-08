@@ -1,5 +1,6 @@
 package com.neosolusi.reloadmanager.features.login;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -29,8 +31,11 @@ public class LoginFragment extends Fragment implements LoginContract.View, TextV
     @BindView(R.id.input_username) EditText mTextUsername;
     @BindView(R.id.input_password) EditText mTextPassword;
     @BindView(R.id.txt_signup) TextView mTextSignUp;
+    @BindView(R.id.btn_login) Button mButtonLogin;
 
     private LoginContract.Presenter mPresenter;
+    private ProgressDialog mDialogSignIn;
+    private OnFragmentInteractionListener mActivityListener;
 
     public LoginFragment()
     {
@@ -48,6 +53,9 @@ public class LoginFragment extends Fragment implements LoginContract.View, TextV
 
         ButterKnife.bind(this, view);
 
+        mTextUsername.setText("tono.purwanto@live.com");
+        mTextPassword.setText("makanan");
+
         mTextPassword.setOnEditorActionListener(this);
 
         mTextSignUp.setOnClickListener(new View.OnClickListener()
@@ -58,15 +66,43 @@ public class LoginFragment extends Fragment implements LoginContract.View, TextV
             }
         });
 
+        mDialogSignIn = new ProgressDialog(getContext());
+        mDialogSignIn.setTitle("Sign In");
+        mDialogSignIn.setMessage("Mohon tunggu");
+        mDialogSignIn.setCancelable(false);
+        mDialogSignIn.setIndeterminate(true);
+        mDialogSignIn.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mDialogSignIn.setIcon(R.drawable.ic_info_black_24dp);
+
         return view;
+    }
+
+    @Override public void onAttach(Context context)
+    {
+        super.onAttach(context);
+
+        if (context instanceof OnFragmentInteractionListener) {
+            mActivityListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString() + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    @Override public void onDetach()
+    {
+        mActivityListener = null;
+
+        super.onDetach();
     }
 
     @Override public void showLoginSuccess()
     {
         Timber.d("Login success, begin synchronization");
 
-        startActivity(new Intent(getActivity(), SyncActivity.class));
-        getActivity().finish();
+        mActivityListener.onSwitchView();
+
+//        startActivity(new Intent(getActivity(), SyncActivity.class));
+//        getActivity().finish();
     }
 
     @Override public void showLoginFailed(String message)
@@ -78,14 +114,31 @@ public class LoginFragment extends Fragment implements LoginContract.View, TextV
                 .show();
     }
 
-    @Override public void showLoading(boolean show)
+    @Override public void showLoading(final boolean show)
     {
-        // Empty
+        getActivity().runOnUiThread(new Runnable()
+        {
+            @Override public void run()
+            {
+                if (show) {
+                    mDialogSignIn.show();
+                } else {
+                    mDialogSignIn.dismiss();
+                }
+            }
+        });
     }
 
     @Override public void showSignUp()
     {
         startActivity(new Intent(getActivity(), SignUpActivity.class));
+    }
+
+    @Override public void setActiveForm(boolean active)
+    {
+        mButtonLogin.setEnabled(active);
+        mTextUsername.setEnabled(active);
+        mTextPassword.setEnabled(active);
     }
 
     @Override public String getUsername()
@@ -124,10 +177,16 @@ public class LoginFragment extends Fragment implements LoginContract.View, TextV
         }
 
         mPresenter.signIn();
+
     }
 
     @Override public void setPresenter(LoginContract.Presenter presenter)
     {
         mPresenter = presenter;
+    }
+
+    public interface OnFragmentInteractionListener
+    {
+        void onSwitchView();
     }
 }

@@ -24,11 +24,9 @@
     </android.support.design.widget.AppBarLayout>
 
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_marginTop="?attr/actionBarSize"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize"
         android:background="#e4e3e3"
         android:orientation="vertical">
 
@@ -47,72 +45,55 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="16dp"
-                    android:text="Menunggu pendeteksian otomatis untuk SMS yang dikirim ke"
+                    android:text="@string/signup_verification"
                     android:textColor="@android:color/black"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp"
+                    />
 
-                <LinearLayout
+                <EditText
+                    android:id="@+id/editText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    />
+
+                <TextView
+                    android:id="@+id/textView9"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                    android:layout_height="wrap_content"
+                    android:text="Masukkan PIN"
+                    android:textAlignment="center"
+                    android:textSize="16sp"/>
 
-                    <TextView
-                        android:id="@+id/textView4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1.44"
-                        android:text="085710728455"
-                        android:textAlignment="center"
-                        android:textColor="@android:color/holo_blue_dark"
-                        android:textSize="24sp"/>
-
-                    <ImageButton
-                        android:id="@+id/editButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/ic_mode_edit_black_24dp"/>
-
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/txt_kirim_ulang"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:padding="16dp"
+                    android:text="Kirim ulang SMS?"
+                    android:textColor="@color/cardview_dark_background"
+                    android:textSize="18sp"/>
 
                 <ProgressBar
-                    android:id="@+id/progressBar"
-                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:id="@+id/progressBar2"
+                    style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:paddingTop="3dp"/>
 
             </LinearLayout>
 
         </android.support.v7.widget.CardView>
 
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:text="Mohon pastikan Anda memiliki layanan SMS yang aktif."
-                    android:textColor="@android:color/black"
-                    android:textSize="18sp"/>
-
-                <TextView
-                    android:id="@+id/textView8"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:text="Duduklah dan bersantai. Kami akan memberitahu Anda bila verifikasi sudah selesai."
-                    android:textColor="@android:color/black"
-                    android:textSize="18sp"/>
-            </LinearLayout>
-
-        </android.support.v7.widget.CardView>
     </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

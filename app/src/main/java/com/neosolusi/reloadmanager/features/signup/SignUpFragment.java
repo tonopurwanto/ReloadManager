@@ -1,6 +1,7 @@
 package com.neosolusi.reloadmanager.features.signup;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.neosolusi.reloadmanager.R;
 import com.neosolusi.reloadmanager.features.signup.verification.VerificationActivity;
@@ -107,5 +110,43 @@ public class SignUpFragment extends Fragment implements SignUpContract.View
     @Override public void showSignUpResult()
     {
         startActivity(new Intent(getActivity(), VerificationActivity.class));
+    }
+
+    @Override public void showSignUpDialog(String phone)
+    {
+        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
+
+        LayoutInflater inflater = this.getActivity().getLayoutInflater();
+        View view = inflater.inflate(R.layout.sign_up_dialog, null);
+
+        dialogBuilder.setView(view);
+        dialogBuilder.setCancelable(false);
+
+        final AlertDialog dialog = dialogBuilder.create();
+
+        Button btnEdit = (Button) view.findViewById(R.id.buttonEdit);
+        Button btnOK = (Button) view.findViewById(R.id.buttonOK);
+        TextView textPhone = (TextView) view.findViewById(R.id.textSignUpPhone);
+
+        textPhone.setText(phone);
+
+        btnEdit.setOnClickListener(new View.OnClickListener()
+        {
+            @Override public void onClick(View v)
+            {
+                dialog.dismiss();
+            }
+        });
+
+        btnOK.setOnClickListener(new View.OnClickListener()
+        {
+            @Override public void onClick(View v)
+            {
+                dialog.dismiss();
+                startActivity(new Intent(getActivity(), VerificationActivity.class));
+            }
+        });
+
+        dialog.show();
     }
 }

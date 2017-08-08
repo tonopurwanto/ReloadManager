@@ -11,6 +11,7 @@ public interface LoginContract
         void showLoginFailed(String message);
         void showLoading(boolean show);
         void showSignUp();
+        void setActiveForm(boolean active);
         String getUsername();
         String getPassword();
     }
@@ -19,7 +20,5 @@ public interface LoginContract
     {
         void signIn();
         void signUp();
-        void attachView(LoginContract.View loginView);
-        void detachView();
     }
 }
