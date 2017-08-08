@@ -125,7 +125,7 @@ public class ApiModule
     public List<DownloadContract> provideListDataSync()
     {
         List<DownloadContract> services = new ArrayList<>();
-//        services.add(new DownloadCustomer());
+        services.add(new DownloadCustomer());
 
         return services;
     }
