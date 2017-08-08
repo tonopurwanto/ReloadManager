@@ -86,8 +86,6 @@ public class LoginFragment extends Fragment implements LoginContract.View, TextV
     @Override public void showSignUp()
     {
         startActivity(new Intent(getActivity(), SignUpActivity.class));
-
-        getActivity().finish();
     }
 
     @Override public String getUsername()

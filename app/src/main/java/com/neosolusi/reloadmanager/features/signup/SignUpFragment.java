@@ -107,7 +107,5 @@ public class SignUpFragment extends Fragment implements SignUpContract.View
     @Override public void showSignUpResult()
     {
         startActivity(new Intent(getActivity(), VerificationActivity.class));
-
-        getActivity().finish();
     }
 }

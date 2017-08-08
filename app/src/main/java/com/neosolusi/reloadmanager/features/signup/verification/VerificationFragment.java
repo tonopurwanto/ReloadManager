@@ -34,8 +34,7 @@ public class VerificationFragment extends Fragment implements VerificationContra
         return new VerificationFragment();
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.fragment_verification, container, false);
 
@@ -53,10 +52,9 @@ public class VerificationFragment extends Fragment implements VerificationContra
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeButtonEnabled(true);
+            actionBar.setTitle("Verifikasi");
         }
         setHasOptionsMenu(true);
-
-        mActivity.getSupportActionBar().setTitle("Verifikasi");
     }
 
     @Override public void onAttach(Context context)
