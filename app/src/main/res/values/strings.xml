@@ -45,4 +45,7 @@
     <string name="btn_log_in">Login</string>
     <string name="new_account">Don\'t have an Account ?</string>
     <string name="txt_sign_up">Sign Up</string>
+    <string name="signup_info">Reload Manager Mobile akan mengirimkan pesan SMS satu kali untuk memverifikasi nomor ponsel Anda. Biaya SMS Operator mungkin berlaku.</string>
+    <string name="signup_phone">Mohon masukkan nomor telepon Anda.</string>
+    <string name="signup_button">Ok</string>
 </resources>

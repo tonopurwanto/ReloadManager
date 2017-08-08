@@ -14,6 +14,8 @@ import com.neosolusi.reloadmanager.features.pos.TransactionPresenter;
 import com.neosolusi.reloadmanager.features.shared.download.DownloadContract;
 import com.neosolusi.reloadmanager.features.signup.SignUpContract;
 import com.neosolusi.reloadmanager.features.signup.SignUpPresenter;
+import com.neosolusi.reloadmanager.features.signup.verification.VerificationContract;
+import com.neosolusi.reloadmanager.features.signup.verification.VerificationPresenter;
 import com.neosolusi.reloadmanager.features.sync.SyncContract;
 import com.neosolusi.reloadmanager.features.sync.SyncPresenter;
 
@@ -55,5 +57,11 @@ public class PresenterModule
     public SignUpContract.Presenter provideSignUpPresenter()
     {
         return new SignUpPresenter();
+    }
+
+    @Provides
+    public VerificationContract.Presenter provideVerificationPresenter()
+    {
+        return new VerificationPresenter();
     }
 }

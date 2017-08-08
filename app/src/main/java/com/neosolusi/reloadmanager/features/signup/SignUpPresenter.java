@@ -18,4 +18,9 @@ public class SignUpPresenter implements SignUpContract.Presenter
     {
 
     }
+
+    @Override public void signUp()
+    {
+        mView.showSignUpResult();
+    }
 }

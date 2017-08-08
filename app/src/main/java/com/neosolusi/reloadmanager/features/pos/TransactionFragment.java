@@ -14,11 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.neosolusi.reloadmanager.R;
-import com.neosolusi.reloadmanager.ReloadManager;
 
 import java.util.List;
-
-import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

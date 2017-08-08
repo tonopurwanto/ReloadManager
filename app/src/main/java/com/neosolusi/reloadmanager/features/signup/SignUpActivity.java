@@ -43,7 +43,7 @@ public class SignUpActivity extends AppCompatActivity
     @Override protected void onPause()
     {
         mPresenter.detach();
-        
+
         super.onPause();
     }
 }

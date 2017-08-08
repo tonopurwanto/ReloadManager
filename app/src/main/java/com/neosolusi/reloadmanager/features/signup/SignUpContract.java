@@ -7,11 +7,14 @@ public interface SignUpContract
 {
     interface View extends BaseViewContract<SignUpContract.Presenter>
     {
-
+        String getPhone();
+        void signUp();
+        void showErrorMessage(String message);
+        void showSignUpResult();
     }
 
     interface Presenter extends BasePresenterContract<SignUpContract.View>
     {
-
+        void signUp();
     }
 }

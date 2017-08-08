@@ -77,6 +77,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.neosolusi.reloadmanager.features.login.LoginActivity"/>
         </activity>
+        <activity
+            android:name=".features.signup.verification.VerificationActivity"
+            android:parentActivityName=".features.signup.SignUpActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.neosolusi.reloadmanager.features.signup.SignUpActivity"/>
+        </activity>
     </application>
 
 </manifest>

@@ -9,7 +9,6 @@ import com.neosolusi.reloadmanager.BuildConfig;
 import com.neosolusi.reloadmanager.data.CustomerRepo;
 
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
 
 import javax.inject.Singleton;
 
