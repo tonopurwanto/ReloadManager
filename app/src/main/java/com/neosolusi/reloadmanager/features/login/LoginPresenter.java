@@ -108,19 +108,4 @@ public class LoginPresenter implements LoginContract.Presenter
     {
         mLoginView.showSignUp();
     }
-
-//    @Override public void attach(LoginContract.View view)
-//    {
-//        mLoginView = view;
-//    }
-//
-//    @Override public void detach()
-//    {
-//        mLoginView = null;
-//    }
-//
-//    @Override public void start()
-//    {
-//
-//    }
 }

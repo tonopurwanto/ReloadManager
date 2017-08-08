@@ -6,12 +6,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.neosolusi.reloadmanager.R;
-import com.neosolusi.reloadmanager.ReloadManager;
 import com.neosolusi.reloadmanager.features.shared.ActivityUtils;
-import com.neosolusi.reloadmanager.features.sync.SyncContract;
 import com.neosolusi.reloadmanager.features.sync.SyncFragment;
-
-import javax.inject.Inject;
 
 public class LoginActivity extends AppCompatActivity implements LoginFragment.OnFragmentInteractionListener
 {
