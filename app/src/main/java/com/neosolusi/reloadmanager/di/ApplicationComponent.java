@@ -5,6 +5,7 @@ import com.neosolusi.reloadmanager.data.customer.CustomerRemoteDataSource;
 import com.neosolusi.reloadmanager.features.customer.CustomerFragment;
 import com.neosolusi.reloadmanager.features.login.LoginFragment;
 import com.neosolusi.reloadmanager.features.pos.TransactionFragment;
+import com.neosolusi.reloadmanager.features.pos.grosir.MkiosFragment;
 import com.neosolusi.reloadmanager.features.shared.download.DownloadCustomer;
 import com.neosolusi.reloadmanager.features.signup.SignUpFragment;
 import com.neosolusi.reloadmanager.features.signup.verification.VerificationFragment;
@@ -27,6 +28,7 @@ public interface ApplicationComponent
     void inject(CustomerFragment target);
     void inject(SignUpFragment target);
     void inject(VerificationFragment target);
+    void inject(MkiosFragment target);
 
     void inject(CustomerRemoteDataSource target);
 

@@ -1,5 +1,6 @@
 package com.neosolusi.reloadmanager.features.pos;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -15,6 +16,7 @@ import android.view.ViewGroup;
 
 import com.neosolusi.reloadmanager.R;
 import com.neosolusi.reloadmanager.ReloadManager;
+import com.neosolusi.reloadmanager.features.customer.CustomerActivity;
 
 import java.util.List;
 
@@ -48,7 +50,17 @@ public class TransactionFragment extends Fragment implements TransactionContract
 
         ((ReloadManager) getActivity().getApplication()).getComponent().inject(this);
 
-        mTransactionAdapter = new TransactionAdapter(getContext());
+        mTransactionAdapter = new TransactionAdapter(getContext(), new TransactionAdapter.OnItemClickListener()
+        {
+            @Override public void onItemClick(View view, TransactionItem item)
+            {
+                switch (item.getTitle()) {
+                    case "Order Stok MKIOS":
+                        startActivity(new Intent(getActivity(), CustomerActivity.class));
+                        getActivity().finish();
+                }
+            }
+        });
     }
 
     @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)

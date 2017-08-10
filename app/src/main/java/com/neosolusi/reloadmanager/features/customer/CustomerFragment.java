@@ -1,5 +1,6 @@
 package com.neosolusi.reloadmanager.features.customer;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -17,6 +18,7 @@ import android.view.ViewGroup;
 
 import com.neosolusi.reloadmanager.R;
 import com.neosolusi.reloadmanager.ReloadManager;
+import com.neosolusi.reloadmanager.features.pos.grosir.MkiosActivity;
 import com.neosolusi.reloadmanager.models.Customer;
 
 import java.util.List;
@@ -52,7 +54,15 @@ public class CustomerFragment extends Fragment implements CustomerContract.View
 
         ((ReloadManager) getActivity().getApplication()).getComponent().inject(this);
 
-        mCustomerAdapter = new CustomerAdapter();
+        mCustomerAdapter = new CustomerAdapter(new CustomerAdapter.OnItemClickListener()
+        {
+            @Override public void onItemClick(View view, Customer customer)
+            {
+                Intent intent = new Intent(getActivity(), MkiosActivity.class);
+                intent.putExtra(MkiosActivity.EXTRA_CUSTOMER_ID, customer.getId());
+                startActivity(intent);
+            }
+        });
     }
 
     @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -71,6 +81,13 @@ public class CustomerFragment extends Fragment implements CustomerContract.View
         super.onResume();
 
         mPresenter.setView(this);
+    }
+
+    @Override public void onPause()
+    {
+        mPresenter.unsetView();
+
+        super.onPause();
     }
 
     @Override public void showCustomers(@NonNull List<Customer> customers)

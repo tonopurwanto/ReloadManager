@@ -27,15 +27,11 @@ public class CustomerLocalDataSource implements CustomerDataSource
         } else {
             callback.onLoadedFailed("No data");
         }
-
-        mRealm.close();
     }
 
     @Override public void getCustomer(@NonNull String custid, @NonNull LoadCustomerCallback callback)
     {
         Customer customer = mRealm.where(Customer.class).equalTo("custid", custid).findFirst();
-
-        mRealm.close();
 
         if (customer != null) {
             callback.onCustomerLoaded(customer);

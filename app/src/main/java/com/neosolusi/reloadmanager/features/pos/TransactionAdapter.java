@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.neosolusi.reloadmanager.R;
+import com.neosolusi.reloadmanager.features.customer.CustomerAdapter;
 
 import java.util.Collections;
 import java.util.List;
@@ -22,12 +23,14 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 {
     private List<TransactionItem> mDataSet = Collections.emptyList();
     private Context mContext;
+    private OnItemClickListener mListener;
 
-    public TransactionAdapter(Context context)
+    public TransactionAdapter(Context context, OnItemClickListener listener)
     {
         setHasStableIds(true);
 
         this.mContext = context;
+        this.mListener = listener;
     }
 
     public void update(List<TransactionItem> menus)
@@ -48,7 +51,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
     @Override public void onBindViewHolder(TransactionAdapter.ViewHolder holder, int position)
     {
-        holder.bindTo(mDataSet.get(position));
+        holder.bindTo(mDataSet.get(position), mListener);
     }
 
     @Override public int getItemCount()
@@ -74,11 +77,19 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             ButterKnife.bind(this, itemView);
         }
 
-        public void bindTo(TransactionItem menu)
+        public void bindTo(final TransactionItem menu, final OnItemClickListener listener)
         {
             mIcon.setImageDrawable(ActivityCompat.getDrawable(mContext, menu.getIcon()));
             mTitle.setText(menu.getTitle());
             mArrow.setImageDrawable(ActivityCompat.getDrawable(mContext, menu.getArrow()));
+
+            itemView.setOnClickListener(new View.OnClickListener()
+            {
+                @Override public void onClick(View v)
+                {
+                    listener.onItemClick(v, menu);
+                }
+            });
         }
     }
 
@@ -111,5 +122,10 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         {
             return true;
         }
+    }
+
+    public interface OnItemClickListener
+    {
+        void onItemClick(View view, TransactionItem item);
     }
 }

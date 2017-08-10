@@ -6,12 +6,17 @@ import android.support.annotation.NonNull;
 
 import com.neosolusi.reloadmanager.data.CustomerRepo;
 import com.neosolusi.reloadmanager.data.ReloadManagerApi;
+import com.neosolusi.reloadmanager.data.customer.CustomerLocalDataSource;
+import com.neosolusi.reloadmanager.data.customer.CustomerRemoteDataSource;
+import com.neosolusi.reloadmanager.data.customer.CustomerRepository;
 import com.neosolusi.reloadmanager.features.customer.CustomerContract;
 import com.neosolusi.reloadmanager.features.customer.CustomerPresenter;
 import com.neosolusi.reloadmanager.features.login.LoginContract;
 import com.neosolusi.reloadmanager.features.login.LoginPresenter;
 import com.neosolusi.reloadmanager.features.pos.TransactionContract;
 import com.neosolusi.reloadmanager.features.pos.TransactionPresenter;
+import com.neosolusi.reloadmanager.features.pos.grosir.MkiosContract;
+import com.neosolusi.reloadmanager.features.pos.grosir.MkiosPresenter;
 import com.neosolusi.reloadmanager.features.shared.download.DownloadContract;
 import com.neosolusi.reloadmanager.features.signup.SignUpContract;
 import com.neosolusi.reloadmanager.features.signup.SignUpPresenter;
@@ -64,5 +69,11 @@ public class PresenterModule
     public VerificationContract.Presenter provideVerificationPresenter()
     {
         return new VerificationPresenter();
+    }
+
+    @Provides
+    public MkiosContract.Presenter provideMkiosPresenter(@NonNull CustomerRepository customerRepository)
+    {
+        return new MkiosPresenter(customerRepository);
     }
 }

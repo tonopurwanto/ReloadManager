@@ -1,7 +1,8 @@
 package com.neosolusi.reloadmanager.features.pos.grosir;
 
-import com.neosolusi.reloadmanager.features.shared.BasePresenterContract;
-import com.neosolusi.reloadmanager.features.shared.BaseViewContract;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 import com.neosolusi.reloadmanager.models.Customer;
 import com.neosolusi.reloadmanager.models.Product;
 
@@ -9,18 +10,24 @@ import java.util.List;
 
 public interface MkiosContract
 {
-    interface View extends BaseViewContract<Presenter>
+    interface View
     {
-        void setCustomers(List<Customer> customers);
-        void setProducts(List<Product> products);
-        void showError(String message);
+        void setCustomers(@NonNull List<Customer> customers);
+        void setProducts(@NonNull List<Product> products);
+        void showOrder(@NonNull List<Product> products);
+        void showErrorMessage(@NonNull String message);
+        void displayCustomerHp(@NonNull String phone);
+        void displayCustomerName(@NonNull String name);
+        void displayTotal(@NonNull Double total);
     }
 
-    interface Presenter extends BasePresenterContract<View>
+    interface Presenter
     {
-        void addProduct(Product product, double qty);
+        void addProduct(@NonNull Product product, double qty);
         void loadCustomers();
         void loadProducts();
+        void calculate(@NonNull Product product, @NonNull Double quantity);
         void saveOrder();
+        void setView(@NonNull MkiosContract.View mkiosView, @Nullable Long id);
     }
 }

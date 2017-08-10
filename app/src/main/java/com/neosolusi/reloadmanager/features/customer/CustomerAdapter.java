@@ -19,10 +19,13 @@ import butterknife.ButterKnife;
 public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHolder>
 {
     private List<Customer> mCustomers = Collections.emptyList();
+    private OnItemClickListener mListener;
 
-    public CustomerAdapter()
+    public CustomerAdapter(OnItemClickListener listener)
     {
         setHasStableIds(true);
+
+        this.mListener = listener;
     }
 
     public void updateCustomers(List<Customer> customers)
@@ -43,10 +46,18 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHo
             ButterKnife.bind(this, itemView);
         }
 
-        public void bindTo(Customer customer)
+        public void bindTo(final Customer customer, final OnItemClickListener listener)
         {
             textId.setText(customer.getCustid());
             textName.setText(customer.getCustname());
+
+            itemView.setOnClickListener(new View.OnClickListener()
+            {
+                @Override public void onClick(View v)
+                {
+                    listener.onItemClick(v, customer);
+                }
+            });
         }
     }
 
@@ -90,7 +101,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHo
 
     @Override public void onBindViewHolder(ViewHolder holder, int position)
     {
-        holder.bindTo(mCustomers.get(position));
+        holder.bindTo(mCustomers.get(position), mListener);
     }
 
     @Override public int getItemCount()
@@ -101,5 +112,10 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHo
     @Override public long getItemId(int position)
     {
         return this.mCustomers.get(position).getId();
+    }
+
+    public interface OnItemClickListener
+    {
+        void onItemClick(View view, Customer customer);
     }
 }

@@ -58,7 +58,13 @@
                 android:value="com.neosolusi.reloadmanager.features.main.masterdetail.ItemListActivity"/>
         </activity>
         <activity
-            android:name=".features.pos.grosir.MkiosActivity">
+            android:name=".features.pos.grosir.MkiosActivity"
+            android:label="Order Stok MKIOS Grosir"
+            android:parentActivityName=".features.main.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.neosolusi.reloadmanager.features.main.MainActivity"/>
         </activity>
         <activity
             android:name=".features.pos.TransactionActivity"

@@ -93,7 +93,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 final int id = item.getItemId();
 
                 if (id == R.id.nav_home) {
-                    startActivity(new Intent(MainActivity.this, CustomerActivity.class));
 //                    CustomerFagment fragment = CustomerFagment.getInstance();
 //                    ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), fragment, R.id.content);
                 } else if (id == R.id.nav_profil) {

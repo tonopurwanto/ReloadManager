@@ -51,4 +51,5 @@
     <string name="signup_verification">Menunggu pendeteksian otomatis untuk sms yang dikirim ke +62xxxxxx. Nomor salah?</string>
     <string name="signup_button">Ok</string>
     <string name="image_logo_big">imageLogoBig</string>
+    <string name="action_done">Done</string>
 </resources>

@@ -4,9 +4,13 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 
 import com.neosolusi.reloadmanager.BuildConfig;
 import com.neosolusi.reloadmanager.data.CustomerRepo;
+import com.neosolusi.reloadmanager.data.customer.CustomerLocalDataSource;
+import com.neosolusi.reloadmanager.data.customer.CustomerRemoteDataSource;
+import com.neosolusi.reloadmanager.data.customer.CustomerRepository;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -44,6 +48,24 @@ public class ApplicationModule
                 .logNoSubscriberMessages(BuildConfig.DEBUG)
                 .sendNoSubscriberEvent(BuildConfig.DEBUG)
                 .build();
+    }
+
+    @Provides @Singleton
+    public CustomerLocalDataSource provideCustomerLocalDataSource()
+    {
+        return new CustomerLocalDataSource();
+    }
+
+    @Provides @Singleton
+    public CustomerRemoteDataSource provideCustomerRemoteDataSource()
+    {
+        return new CustomerRemoteDataSource();
+    }
+
+    @Provides @Singleton
+    public CustomerRepository provideCustomerRepository(@NonNull CustomerLocalDataSource localSource, @NonNull CustomerRemoteDataSource remoteSource)
+    {
+        return CustomerRepository.getInstance(localSource, remoteSource);
     }
 
     @Provides @Singleton
